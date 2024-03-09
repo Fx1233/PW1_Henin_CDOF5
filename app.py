@@ -2,9 +2,17 @@ import os
 import time
 import random
 
-def create_grid(width, height):
+def create_grid(width, height, mode='random', custom_cells=[]):
     """Créer une nouvelle grille (tableau 2D) avec les dimensions données."""
-    return [[random.randint(0, 1) for _ in range(width)] for _ in range(height)]
+    grid = [[0 for _ in range(width)] for _ in range(height)]
+    
+    if mode == 'random':
+        return [[random.randint(0, 1) for _ in range(width)] for _ in range(height)]
+    elif mode == 'custom':
+        for cell in custom_cells:
+            if 0 <= cell[0] < height and 0 <= cell[1] < width:
+                grid[cell[0]][cell[1]] = 1
+        return grid
 
 def print_grid(grid):
     """Imprimer la grille dans la console avec des carrés."""
@@ -26,6 +34,21 @@ def count_neighbors(grid, x, y):
                 count += grid[x + i][y + j]
     return count
 
+def get_custom_cells():
+    """Permettre à l'utilisateur de définir des cellules vivantes."""
+    cells = []
+    print("Entrez les coordonnées des cellules vivantes sous la forme 'x,y'. Tapez 'fin' pour terminer.")
+    while True:
+        input_str = input()
+        if input_str.lower() == 'fin':
+            break
+        try:
+            x, y = map(int, input_str.split(','))
+            cells.append((x, y))
+        except ValueError:
+            print("Format invalide. Veuillez entrer les coordonnées sous la forme 'x,y'.")
+    return cells
+    
 def update_grid(grid):
     """Mettre à jour la grille pour la génération suivante."""
     new_grid = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
@@ -44,7 +67,12 @@ def update_grid(grid):
 
 def main():
     width, height = 20, 10  # Taille de la grille
-    grid = create_grid(width, height)
+    mode = input("Choisissez le mode de démarrage ('random' ou 'custom'): ")
+    if mode == 'custom':
+        custom_cells = get_custom_cells()
+        grid = create_grid(width, height, mode, custom_cells)
+    else:
+        grid = create_grid(width, height)
 
     try:
         while True:
