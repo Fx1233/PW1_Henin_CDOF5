@@ -46,5 +46,27 @@ Contributing
 Contributions, ideas, and feedback are welcome! Please feel free to fork the repository, create feature branches, and submit pull requests.
 License
 
+Frequently Asked Questions (FAQ):
+
+-How do I stop the simulation?
+Press Ctrl + C to stop the simulation at any time.
+
+-Can I change the speed of the simulation?
+Yes, adjust the time.sleep(0.5) value in the main function to speed up or slow down the simulation.
+
+-Is it possible to save the current state of the game?
+Feature planned for future updates.
+
+
+
+Reporting Bugs and Requesting Features
+Reporting Bugs
+If you encounter any bugs, please report them via the 'Issues' tab on the GitHub repository page. Include detailed information about the bug, steps to reproduce it, and the environment in which it occurred.
+
+Requesting Features
+We welcome suggestions for new features! Feel free to open an issue to discuss potential ideas or enhancements you'd like to see in the Game of Life.
+
+
+
 MIT License
 
